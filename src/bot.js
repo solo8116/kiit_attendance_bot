@@ -12,7 +12,13 @@ const bot = async (user, pass) => {
     const userId = user;
     const userPassword = pass;
 
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      args: ["--disable-setuid-sandbox", "--no-sandbox", "--no-zygote"],
+      executablePath:
+        process.env.NODE_ENV == "production"
+          ? process.env.PUPPETEER_EXECUTABLE_PATH
+          : puppeteer.executablePath(),
+    });
     const page = await browser.newPage();
     await page.goto(url);
 
@@ -39,7 +45,7 @@ const bot = async (user, pass) => {
     );
 
     await selectAboveBtn.click();
-    await new Promise((resolve, reject) => setTimeout(resolve, 1000));
+    await new Promise((resolve, reject) => setTimeout(resolve, 2000));
     var iframeHandler = await page.$('iframe[name="Desktop Inner Page   "]');
     const serviceFrame = await iframeHandler.contentFrame();
 
@@ -54,7 +60,7 @@ const bot = async (user, pass) => {
       );
     await selectStudentAttendanceDetailsLink.click();
 
-    await new Promise((resolve, reject) => setTimeout(resolve, 1000));
+    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
 
     iframeHandler = await serviceFrame.$(
       'iframe[title="Student Attendance Details"]'
