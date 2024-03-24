@@ -7,10 +7,10 @@ const HtmlTableToJson = require("html-table-to-json");
 const url = process.env.URL;
 var attendance;
 
-const bot = async (user, pass) => {
-  try {
-    const userId = user;
-    const userPassword = pass;
+const bot = async () => {
+  // try {
+    const userId = process.env.USER_NAME;
+    const userPassword = process.env.USER_PASSWORD;
 
     const browser = await puppeteer.launch({
       args: ["--disable-setuid-sandbox", "--no-sandbox", "--no-zygote"],
@@ -110,10 +110,10 @@ const bot = async (user, pass) => {
     await attendanceSubmit.click();
     await new Promise((resolve, reject) => setTimeout(resolve, 2000));
     await browser.close();
-    return attendance;
-  } catch (error) {
-    throw error;
-  }
+    console.log(attendance)
+  // } catch (error) {
+  //   throw error;
+  // }
 };
 
 const attendanceParser = async (xml) => {
@@ -139,4 +139,6 @@ const attendanceParser = async (xml) => {
   await attendance.shift();
 };
 
-module.exports = bot;
+bot()
+
+// module.exports = bot;
