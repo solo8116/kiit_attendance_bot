@@ -8,12 +8,12 @@ const url = process.env.URL;
 var attendance;
 
 const bot = async () => {
-  // try {
+  try {
     const userId = process.env.USER_NAME;
     const userPassword = process.env.USER_PASSWORD;
 
     const browser = await puppeteer.launch({
-      args: ["--disable-setuid-sandbox", "--no-sandbox", "--no-zygote"],
+      args: ["--disable-setuid-sandbox", "--no-sandbox"],
       executablePath:
         process.env.NODE_ENV == "production"
           ? process.env.PUPPETEER_EXECUTABLE_PATH
@@ -111,9 +111,9 @@ const bot = async () => {
     await new Promise((resolve, reject) => setTimeout(resolve, 2000));
     await browser.close();
     console.log(attendance)
-  // } catch (error) {
-  //   throw error;
-  // }
+  } catch (error) {
+    throw error;
+  }
 };
 
 const attendanceParser = async (xml) => {
