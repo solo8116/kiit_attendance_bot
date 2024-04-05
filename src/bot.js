@@ -7,10 +7,10 @@ const HtmlTableToJson = require("html-table-to-json");
 const url = process.env.URL;
 var attendance;
 
-const bot = async () => {
+const bot = async (user,pass) => {
   try {
-    const userId = process.env.USER_NAME;
-    const userPassword = process.env.USER_PASSWORD;
+    const userId = user;
+    const userPassword = pass;
 
     const browser = await puppeteer.launch({
       args: ["--disable-setuid-sandbox", "--no-sandbox", "--single-process", "--no-zygote"],
