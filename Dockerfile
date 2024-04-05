@@ -7,4 +7,4 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-CMD [ "node", "src/bot.js" ]
+CMD [ "node", "src/app.js" ]
