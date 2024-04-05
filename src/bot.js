@@ -45,7 +45,7 @@ const bot = async () => {
     );
 
     await selectAboveBtn.click();
-    await new Promise((resolve, reject) => setTimeout(resolve, 2000));
+    await new Promise((resolve, reject) => setTimeout(resolve, 1000));
     var iframeHandler = await page.$('iframe[name="Desktop Inner Page    "]');
     const serviceFrame = await iframeHandler.contentFrame();
 
