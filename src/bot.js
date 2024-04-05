@@ -56,7 +56,9 @@ const bot = async (user,pass) => {
 
     console.log("page opened");
     
-    await selectAboveBtn.click();
+    await page.evaluate((element) => {
+    element.click()
+    }, selectAboveBtn);
 
     console.log("above button clicked");
 
@@ -68,7 +70,9 @@ const bot = async (user,pass) => {
     const studentSelfServiceLink = await serviceFrame.waitForSelector(
       `xpath///span[@class="urTxtStd" and @ct="TV" and contains(text(), "Student Self Service")]`
     );
-    await studentSelfServiceLink.click();
+    await serviceFrame.evaluate((element) => {
+    element.click()
+    }, studentSelfServiceLink);
 
     console.log("student self service clicked");
 
@@ -91,7 +95,9 @@ const bot = async (user,pass) => {
       `xpath///input[@style="width:13.2ex;"]`
     );
 
-    await yearInput.click();
+    await attendanceFrame.evaluate((element) => {
+    element.click()
+    }, yearInput);
 
     console.log("year input");
 
@@ -99,13 +105,17 @@ const bot = async (user,pass) => {
       `xpath///div[@data-itemvalue1="2023-2024"]`
     );
 
-    await year.click();
+    await attendanceFrame.evaluate((element) => {
+    element.click()
+    }, year);
 
     let sessionInput = await attendanceFrame.waitForSelector(
       `xpath///input[@style="width:25.3ex;"]`
     );
 
-    await sessionInput.click();
+    await attendanceFrame.evaluate((element) => {
+    element.click()
+    }, sessionInput);
 
     console.log("session clicked");
     
@@ -113,7 +123,9 @@ const bot = async (user,pass) => {
       `xpath///div[@data-itemvalue1="Spring"]`
     );
 
-    await session.click();
+    await attendanceFrame.evaluate((element) => {
+    element.click()
+    }, session);
     await page.setRequestInterception(true);
 
     page.on("response", async (response) => {
@@ -133,7 +145,9 @@ const bot = async (user,pass) => {
 
     console.log("submit btn clicked");
 
-    await attendanceSubmit.click();
+    await attendanceFrame.evaluate((element) => {
+    element.click()
+    }, attendanceSubmit);
     await new Promise((resolve, reject) => setTimeout(resolve, 2000));
     await browser.close();
     return attendance;
