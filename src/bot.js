@@ -64,7 +64,7 @@ const bot = async (user,pass) => {
 
     
     await new Promise((resolve, reject) => setTimeout(resolve, 1000));
-    var iframeHandler = await page.$('iframe[name="Desktop Inner Page    "]');
+    var iframeHandler = await page.$('iframe[name="Desktop Inner Page   "]');
     const serviceFrame = await iframeHandler.contentFrame();
 
     const studentSelfServiceLink = await serviceFrame.waitForSelector(
