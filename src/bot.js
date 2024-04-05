@@ -13,7 +13,7 @@ const bot = async () => {
     const userPassword = process.env.USER_PASSWORD;
 
     const browser = await puppeteer.launch({
-      args: ["--disable-setuid-sandbox", "--no-sandbox"],
+      args: ["--disable-setuid-sandbox", "--no-sandbox", "--single-process", "--no-zygote"],
       executablePath:
         process.env.NODE_ENV == "production"
           ? process.env.PUPPETEER_EXECUTABLE_PATH
@@ -46,7 +46,7 @@ const bot = async () => {
 
     await selectAboveBtn.click();
     await new Promise((resolve, reject) => setTimeout(resolve, 2000));
-    var iframeHandler = await page.$('iframe[name="Desktop Inner Page   "]');
+    var iframeHandler = await page.$('iframe[name="Desktop Inner Page    "]');
     const serviceFrame = await iframeHandler.contentFrame();
 
     const studentSelfServiceLink = await serviceFrame.waitForSelector(
@@ -110,7 +110,7 @@ const bot = async () => {
     await attendanceSubmit.click();
     await new Promise((resolve, reject) => setTimeout(resolve, 2000));
     await browser.close();
-    console.log(attendance)
+    console.log(attendance);
   } catch (error) {
     throw error;
   }
@@ -139,6 +139,5 @@ const attendanceParser = async (xml) => {
   await attendance.shift();
 };
 
-bot()
 
-// module.exports = bot;
+module.exports = bot;
