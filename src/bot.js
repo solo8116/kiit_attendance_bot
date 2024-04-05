@@ -54,6 +54,8 @@ const bot = async (user,pass) => {
       `xpath///td[@onclick="doMouseClick(1,1);return false;"]`
     );
 
+    console.log("page opened");
+    
     await selectAboveBtn.click();
 
     console.log("above button clicked");
