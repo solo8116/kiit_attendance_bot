@@ -44,7 +44,9 @@ const bot = async (user,pass) => {
       `xpath///input[@class="urBtnStdNew"]`
     );
 
-    await submit.click();
+    await page.evaluate((element) => {
+    element.click()
+    }, submit);
 
     console.log("clicked submit");
 
