@@ -50,6 +50,8 @@ const bot = async (user,pass) => {
 
     console.log("clicked submit");
 
+    await page.waitForNavigation();
+
     let selectAboveBtn = await page.waitForSelector(
       `xpath///td[@onclick="doMouseClick(1,1);return false;"]`
     );
